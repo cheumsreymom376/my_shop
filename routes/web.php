@@ -1,7 +1,8 @@
-
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,7 +34,8 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout')->mid
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'viewProducts'])->name('products.index');
 Route::get('/products/{slug}', [HomeController::class, 'productDetails'])->name('products.show');
-Route::get('/category/{slug}', [HomeController::class, 'productsByCategory'])->name('products.category');
+Route::get('/category/{id}', [ProductController::class, 'category'])
+    ->name('products.category');
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/place', [CartController::class, 'placeOrder'])->name('checkout.place');
     Route::get('/order-confirmation/{id}', [CartController::class, 'orderConfirmation'])->name('order.confirmation');
     Route::get('/my-orders', [CartController::class, 'myOrders'])->name('orders.index');
-    Route::get('/orders/{id}', [CartController::class, 'myOrders'])->name('orders.show');
+    Route::get('/orders/{id}', [CartController::class, 'showOrder'])->name('orders.show');
 });
 
 /*
@@ -60,21 +62,12 @@ Route::middleware('auth')->group(function () {
 */
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    // Dashboard
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    
-    // Product Management
-    Route::get('/products', [AdminController::class, 'manageProducts'])->name('products.index');
-    Route::get('/products/create', [AdminController::class, 'createProduct'])->name('products.create');
-    Route::post('/products', [AdminController::class, 'storeProduct'])->name('products.store');
-    Route::get('/products/{product}/edit', [AdminController::class, 'editProduct'])->name('products.edit');
-    Route::put('/products/{product}', [AdminController::class, 'updateProduct'])->name('products.update');
-    Route::delete('/products/{product}', [AdminController::class, 'deleteProduct'])->name('products.delete');
-    
-    // Category Management
-    Route::get('/categories', [AdminController::class, 'manageCategories'])->name('categories.index');
-    Route::get('/categories/create', [AdminController::class, 'createCategory'])->name('categories.create');
-    Route::post('/categories', [AdminController::class, 'storeCategory'])->name('categories.store');
-    Route::get('/categories/{category}/edit', [AdminController::class, 'editCategory'])->name('categories.edit');
-    Route::put('/categories/{category}', [AdminController::class, 'updateCategory'])->name('categories.update');
-    Route::delete('/categories/{category}', [AdminController::class, 'deleteCategory'])->name('categories.delete');
+
+    // Product Management (Resource routes)
+    Route::resource('products', ProductController::class);
+
+    // Category Management (Resource routes)
+    Route::resource('categories', CategoryController::class);
 });

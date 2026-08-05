@@ -93,9 +93,9 @@
                             <label for="image" class="form-label">Product Image</label>
                             @if($product->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $product->image) }}" 
-                                         alt="{{ $product->name }}" 
-                                         style="max-width: 150px; max-height: 150px; border-radius: 5px;">
+                                    <img src="{{ asset('images/products/' . $product->image) }}"
+                            alt="{{ $product->name }}"
+                            class="card-img-top">
                                 </div>
                             @endif
                             <input type="file" class="form-control @error('image') is-invalid @enderror" 

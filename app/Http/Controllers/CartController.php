@@ -140,10 +140,11 @@ class CartController extends Controller
 
         foreach ($cartItems as $item) {
             OrderItem::create([
-                'order_id' => $order->id,
+                'order_id'   => $order->id,
                 'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
+                'quantity'   => $item->quantity,
+                'price'      => $item->price,
+                'total'      => $item->quantity * $item->price,
             ]);
 
             $product = $item->product;
