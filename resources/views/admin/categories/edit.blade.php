@@ -42,7 +42,7 @@
                             <label for="image" class="form-label">Category Image</label>
                             @if($category->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $category->image) }}" 
+                                    <img src="{{ asset('images/categories/' . $category->image) }}" 
                                          alt="{{ $category->name }}" 
                                          style="max-width: 150px; max-height: 150px; border-radius: 5px;">
                                 </div>

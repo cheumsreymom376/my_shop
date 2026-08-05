@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FrontendProductController;
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
@@ -34,9 +34,15 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout')->mid
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'viewProducts'])->name('products.index');
 Route::get('/products/{slug}', [HomeController::class, 'productDetails'])->name('products.show');
-Route::get('/category/{id}', [ProductController::class, 'category'])
-    ->name('products.category');
 
+    
+//froontend product routes
+Route::get('/products', [FrontendProductController::class, 'index'])
+    ->name('products.index');
+
+
+Route::get('/category/{slug}', [HomeController::class, 'productsByCategory'])
+    ->name('products.category');
 /*
 |--------------------------------------------------------------------------
 | Cart & Order Routes (Authenticated)

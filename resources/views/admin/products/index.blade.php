@@ -40,7 +40,7 @@
                             @if($product->image)
                             <img src="{{ asset('images/products/' . $product->image) }}"
                                 alt="{{ $product->name }}"
-                                class="card-img-top">
+                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
                             @else
                             <div class="bg-light d-flex align-items-center justify-content-center"
                                 style="width: 50px; height: 50px; border-radius: 5px;">
@@ -85,7 +85,7 @@
                                     class="btn btn-sm btn-info">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                
+
                                 <form action="{{ route('admin.products.destroy', $product) }}"
                                     method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this product?')">

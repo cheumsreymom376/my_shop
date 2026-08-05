@@ -31,26 +31,37 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge([
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+
+        $imageName = null;
+
+
+        if ($request->hasFile('image')) {
+
+            $imageName = time() . '.' . $request->image->extension();
+
+            $request->image->move(
+                public_path('images/categories'),
+                $imageName
+            );
+        }
+
+
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $imageName,
             'is_active' => $request->has('is_active'),
         ]);
 
-        $request->validate([
-            'name' => 'required|string|max:255|unique:categories',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'is_active' => 'boolean',
-        ]);
 
-        $data = $request->all();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('categories', 'public');
-        }
-
-        Category::create($data);
-
-        return redirect()->route('admin.categories.index')
+        return redirect()
+            ->route('admin.categories.index')
             ->with('success', 'Category created successfully.');
     }
 
@@ -68,28 +79,49 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'is_active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->all();
-        $data['is_active'] = $request->has('is_active');
+
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'is_active' => $request->has('is_active'),
+        ];
+
 
         if ($request->hasFile('image')) {
-            if ($category->image) {
-                Storage::disk('public')->delete($category->image);
+
+
+            // delete old image
+            if ($category->image && file_exists(public_path('categories/' . $category->image))) {
+
+                unlink(public_path('categories/' . $category->image));
             }
-            $data['image'] = $request->file('image')->store('categories', 'public');
+
+
+            $imageName = time() . '.' . $request->image->extension();
+
+
+            $request->image->move(
+                public_path('categories'),
+                $imageName
+            );
+
+
+            $data['image'] = $imageName;
         }
+
 
         $category->update($data);
 
-        return redirect()->route('admin.categories.index')
+
+        return redirect()
+            ->route('admin.categories.index')
             ->with('success', 'Category updated successfully.');
     }
-
     /**
      * Delete a category.
      */

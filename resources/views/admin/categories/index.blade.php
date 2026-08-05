@@ -44,7 +44,7 @@
                     <tr>
                         <td>
                             @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}"
+                            <img src="{{ asset('images/categories/' . $category->image) }}"
                                 alt="{{ $category->name }}"
                                 style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                             @else

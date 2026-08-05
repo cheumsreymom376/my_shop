@@ -13,7 +13,7 @@
                     <div class="row align-items-center">
                         @if($category->image)
                             <div class="col-md-2">
-                                <img src="{{ asset('storage/' . $category->image) }}" 
+                                <img src="{{ asset('images/categories/' . $category->image) }}" 
                                      alt="{{ $category->name }}" 
                                      class="img-fluid rounded-circle"
                                      style="width: 100px; height: 100px; object-fit: cover;">

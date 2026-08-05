@@ -28,14 +28,15 @@
         <div class="row">
             @forelse($categories as $category)
             <div class="col-md-3 col-sm-6 mb-3">
-                <a href="{{ route('products.category', $category->id) }}" class="text-decoration-none">
+                <a href="{{ route('products.category', $category->slug) }}" class="text-decoration-none">
                     <div class="card category-card h-100 text-center">
                         <div class="card-body">
                             @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}"
+                            <img src="{{ asset('images/categories/' . $category->image) }}"
                                 alt="{{ $category->name }}"
                                 class="img-fluid rounded-circle mb-2"
-                                style="width: 80px; height: 80px; object-fit: cover;">
+                                style="width:80px;height:80px;object-fit:cover;">
+
                             @else
                             <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
                                 style="width: 80px; height: 80px;">

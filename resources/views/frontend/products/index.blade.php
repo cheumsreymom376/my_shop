@@ -47,7 +47,8 @@
                         <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none">
                             @if($product->image)
                             <img src="{{ asset('images/products/' . $product->image) }}"
-                                alt="{{ $product->name }}">
+                            alt="{{ $product->name }}"
+                            class="card-img-top">
                             @else
                             <div class="bg-light product-img d-flex align-items-center justify-content-center">
                                 <i class="bi bi-image" style="font-size: 50px; color: #ccc;"></i>
