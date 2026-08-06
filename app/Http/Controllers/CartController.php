@@ -176,4 +176,13 @@ class CartController extends Controller
 
         return view('frontend.orders.index', compact('orders'));
     }
+    public function showOrder($id)
+    {
+        $order = Order::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->with('items.product')
+            ->firstOrFail();
+
+        return view('frontend.orders.show', compact('order'));
+    }
 }

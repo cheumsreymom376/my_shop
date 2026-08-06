@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
             background: #2c3e50;
             padding-top: 20px;
         }
+
         .sidebar .nav-link {
             color: #ecf0f1;
             padding: 12px 20px;
@@ -20,38 +21,46 @@
             border-radius: 8px;
             transition: all 0.3s;
         }
+
         .sidebar .nav-link:hover {
             background: #34495e;
             color: #fff;
         }
+
         .sidebar .nav-link.active {
             background: #3498db;
             color: #fff;
         }
+
         .sidebar .nav-link i {
             margin-right: 10px;
         }
+
         .main-content {
             padding: 20px;
             background: #f5f6fa;
             min-height: 100vh;
         }
+
         .stat-card {
             background: white;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
         }
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
+
         .stat-icon {
             font-size: 2.5rem;
             opacity: 0.7;
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid p-0">
         <div class="row g-0">
@@ -63,30 +72,32 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
-                           href="{{ route('admin.dashboard') }}">
+                        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+                            href="{{ route('admin.dashboard') }}">
                             <i class="bi bi-speedometer2"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" 
-                           href="{{ route('admin.products.index') }}">
+                        <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
+                            href="{{ route('admin.products.index') }}">
                             <i class="bi bi-box-seam"></i> Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" 
-                           href="{{ route('admin.categories.index') }}">
+                        <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"
+                            href="{{ route('admin.categories.index') }}">
                             <i class="bi bi-tags"></i> Categories
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">
                             <i class="bi bi-people"></i> Users
                         </a>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.orders.index') }}">
                             <i class="bi bi-cart"></i> Orders
                         </a>
                     </li>
@@ -109,17 +120,17 @@
             <!-- Main Content -->
             <main class="col-md-10 main-content">
                 @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle"></i> {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
                 @endif
 
                 @if(session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-circle"></i> {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle"></i> {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
                 @endif
 
                 @yield('content')
@@ -130,4 +141,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 </body>
+
 </html>

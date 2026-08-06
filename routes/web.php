@@ -10,6 +10,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendProductController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
@@ -35,7 +39,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'viewProducts'])->name('products.index');
 Route::get('/products/{slug}', [HomeController::class, 'productDetails'])->name('products.show');
 
-    
+
 //froontend product routes
 Route::get('/products', [FrontendProductController::class, 'index'])
     ->name('products.index');
@@ -77,3 +81,61 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Category Management (Resource routes)
     Route::resource('categories', CategoryController::class);
 });
+
+
+
+Route::prefix('admin')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::resource('users', UserController::class)
+            ->names('admin.users');
+    });
+
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get(
+        '/profile',
+        [ProfileController::class, 'index']
+    )
+        ->name('profile');
+
+
+    Route::put(
+        '/profile',
+        [ProfileController::class, 'update']
+    )
+        ->name('profile.update');
+});
+
+
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+
+        Route::get(
+            '/dashboard',
+            [AdminController::class, 'dashboard']
+        )
+            ->name('dashboard');
+
+
+        Route::resource('products', ProductController::class);
+
+
+        Route::resource('categories', CategoryController::class);
+
+
+        Route::resource('users', UserController::class);
+
+
+        Route::get(
+            '/orders',
+            [OrderController::class, 'index']
+        )
+            ->name('orders.index');
+    });

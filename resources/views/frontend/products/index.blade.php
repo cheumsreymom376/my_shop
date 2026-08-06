@@ -21,8 +21,8 @@
                         </li>
                         @foreach($categories as $category)
                         <li class="mb-2">
-                            <a href="{{ route('products.category', ['id' => $category->id]) }}"
-                                class="text-decoration-none {{ request()->route('id') == $category->id ? 'fw-bold text-primary' : '' }}">
+                            <a href="{{ route('products.category', ['slug' => $category->slug]) }}"
+                                class="text-decoration-none {{ request()->route('slug') == $category->slug ? 'fw-bold text-primary' : '' }}">
                                 <i class="bi bi-tag"></i> {{ $category->name }}
                                 <span class="badge bg-secondary float-end">{{ $category->products_count }}</span>
                             </a>
@@ -37,7 +37,7 @@
         <div class="col-md-9">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 mb-0">Products</h1>
-                <span class="text-muted">{{ $products->total() }} products found</span>
+                <span class="text-muted">{{$products->count() }} products found</span>
             </div>
 
             <div class="row">
@@ -100,9 +100,7 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-4">
-                {{ $products->links() }}
-            </div>
+            
         </div>
     </div>
 </div>
