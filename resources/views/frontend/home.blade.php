@@ -4,18 +4,26 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-section text-white py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h1 class="display-4 fw-bold">Welcome to MyShop</h1>
-                <p class="lead">Discover amazing products at great prices. Shop now and enjoy exclusive deals!</p>
-                <a href="{{ route('products.index') }}" class="btn btn-light btn-lg mt-3">
-                    <i class="bi bi-shop"></i> Start Shopping
+<section class="hero-section">
+    <div class="hero-overlay">
+        <div class="container-fluid px-5">
+            <div class="hero-content">
+
+                <h1 class="display-4 fw-bold">
+                    Welcome to MyShop
+                </h1>
+
+                <p class="lead">
+                    Discover amazing products at great prices.
+                    Shop now and enjoy exclusive deals!
+                </p>
+
+                <a href="{{ route('products.index') }}"
+                   class="btn btn-light btn-lg mt-3">
+                    <i class="bi bi-shop"></i>
+                    Start Shopping
                 </a>
-            </div>
-            <div class="col-md-6 text-center">
-                <i class="bi bi-bag-check" style="font-size: 150px; opacity: 0.8;"></i>
+
             </div>
         </div>
     </div>
