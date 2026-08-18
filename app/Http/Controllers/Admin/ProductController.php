@@ -83,8 +83,10 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'sale_price' => 'nullable|numeric|min:0|lt:price',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $data = [
@@ -98,11 +100,18 @@ class ProductController extends Controller
             'is_featured' => $request->has('is_featured') ? 1 : 0,
         ];
 
+        if ($request->hasFile('image')) {
+            if ($product->image && file_exists(public_path('images/products/' . $product->image))) {
+                unlink(public_path('images/products/' . $product->image));
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/products'), $imageName);
+            $data['image'] = $imageName;
+        }
+
         $product->update($data);
 
-        return redirect()
-            ->route('admin.products.index')
-            ->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -119,5 +128,4 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')
             ->with('success', 'Product deleted successfully.');
     }
-    
 }

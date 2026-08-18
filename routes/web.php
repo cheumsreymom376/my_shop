@@ -36,7 +36,7 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout')->mid
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products', [HomeController::class, 'viewProducts'])->name('products.index');
+// Route::get('/products', [HomeController::class, 'viewProducts'])->name('products.index');
 Route::get('/products/{slug}', [HomeController::class, 'productDetails'])->name('products.show');
 
 
@@ -92,8 +92,6 @@ Route::prefix('admin')
             ->names('admin.users');
     });
 
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get(
@@ -101,7 +99,6 @@ Route::middleware('auth')->group(function () {
         [ProfileController::class, 'index']
     )
         ->name('profile');
-
 
     Route::put(
         '/profile',

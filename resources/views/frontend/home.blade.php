@@ -4,28 +4,60 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-overlay">
-        <div class="container-fluid px-5">
-            <div class="hero-content">
+<section>
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
+        <div class="carousel-inner">
 
-                <h1 class="display-4 fw-bold">
-                    Welcome to MyShop
-                </h1>
-
-                <p class="lead">
-                    Discover amazing products at great prices.
-                    Shop now and enjoy exclusive deals!
-                </p>
-
-                <a href="{{ route('products.index') }}"
-                   class="btn btn-light btn-lg mt-3">
-                    <i class="bi bi-shop"></i>
-                    Start Shopping
-                </a>
-
+            <div class="carousel-item active">
+                <img src="{{ asset('images/b01.png') }}" class="d-block w-100" alt="Glow Naturally. Shine Beautifully.">
+                <div class="carousel-caption">
+                    <div class="banner-text text-start">
+                        <h1 class="display-4 fw-bold text-rose">Glow Naturally. Shine Beautifully.</h1>
+                        <p class="lead text-rose">Elevate your beauty with clean, safe, and effective skincare for
+                            all skin types.</p>
+                        <p class="fw-semibold text-rose">Starting at $2</p>
+                        <a href="{{ route('products.index') }}" class="btn btn-dark px-4 py-2 mt-2">Shop Now</a>
+                    </div>
+                </div>
             </div>
+
+            <div class="carousel-item">
+                <img src="{{ asset('images/banner-fashion.png') }}" class="d-block w-100" alt="Glow Naturally. Shine Beautifully.">
+                <div class="carousel-caption">
+                    <div class="banner-text text-start">
+                        <h1 class="display-4 fw-bold text-white">Glow Naturally. Shine Beautifully.</h1>
+                        <p class="lead text-light">Elevate your beauty with clean, safe, and effective skincare for
+                            all skin types.</p>
+                        <p class="fw-semibold text-white">Starting at $2</p>
+                        <a href="{{ route('products.index') }}" class="btn btn-dark px-4 py-2 mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="{{ asset('images/b0.png') }}" class="d-block w-100" alt="Glow Naturally. Shine Beautifully.">
+                <div class="carousel-caption">
+                    <div class="banner-text text-start">
+                        <h1 class="display-4 fw-bold text-rose">Glow Naturally. Shine Beautifully.</h1>
+                        <p class="lead text-rose">Elevate your beauty with clean, safe, and effective skincare for
+                            all skin types.</p>
+                        <p class="fw-semibold text-rose">Starting at $2</p>
+                        <a href="{{ route('products.index') }}" class="btn btn-dark px-4 py-2 mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>
 

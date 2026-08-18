@@ -141,8 +141,8 @@
                 <div class="card product-card h-100">
                     <a href="{{ route('products.show', $related->slug) }}" class="text-decoration-none">
                         @if($related->image)
-                        <img src="{{ asset('images/products/' . $product->image) }}"
-                            alt="{{ $product->name }}"
+                        <img src="{{ asset('images/products/' . $related->image) }}"
+                            alt="{{ $related->name }}"
                             class="card-img-top">
 
                         @else

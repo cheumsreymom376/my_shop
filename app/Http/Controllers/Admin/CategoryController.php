@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -34,31 +33,13 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
-
-
-        $imageName = null;
-
-
-        if ($request->hasFile('image')) {
-
-            $imageName = time() . '.' . $request->image->extension();
-
-            $request->image->move(
-                public_path('images/categories'),
-                $imageName
-            );
-        }
-
 
         Category::create([
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $imageName,
             'is_active' => $request->has('is_active'),
         ]);
-
 
         return redirect()
             ->route('admin.categories.index')
@@ -81,47 +62,19 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-
-        $data = [
+        $category->update([
             'name' => $request->name,
             'description' => $request->description,
             'is_active' => $request->has('is_active'),
-        ];
-
-
-        if ($request->hasFile('image')) {
-
-
-            // delete old image
-            if ($category->image && file_exists(public_path('categories/' . $category->image))) {
-
-                unlink(public_path('categories/' . $category->image));
-            }
-
-
-            $imageName = time() . '.' . $request->image->extension();
-
-
-            $request->image->move(
-                public_path('categories'),
-                $imageName
-            );
-
-
-            $data['image'] = $imageName;
-        }
-
-
-        $category->update($data);
-
+        ]);
 
         return redirect()
             ->route('admin.categories.index')
             ->with('success', 'Category updated successfully.');
     }
+
     /**
      * Delete a category.
      */
@@ -130,10 +83,6 @@ class CategoryController extends Controller
         if ($category->products()->count() > 0) {
             return redirect()->route('admin.categories.index')
                 ->with('error', 'Cannot delete category with products.');
-        }
-
-        if ($category->image) {
-            Storage::disk('public')->delete($category->image);
         }
 
         $category->delete();
