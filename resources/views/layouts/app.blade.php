@@ -38,7 +38,9 @@
                             <i class="fas fa-user me-3"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userIconDropdown">
-                            <li><h6 class="dropdown-header">{{ Auth::user()->name }}</h6></li>
+                            <li>
+                                <h6 class="dropdown-header">{{ Auth::user()->name }}</h6>
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('profile') }}">
                                     <i class="bi bi-person"></i> My Profile
@@ -51,7 +53,9 @@
                             </li>
 
                             @if(Auth::user()->isAdmin())
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                     <i class="bi bi-speedometer2"></i> Admin Panel
@@ -59,7 +63,9 @@
                             </li>
                             @endif
 
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                                     @csrf
@@ -144,7 +150,7 @@
                         </li>
                         @endauth
 
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('contact.index') }}">Contact</a></li>
 
                         @guest
                         <li class="nav-item">

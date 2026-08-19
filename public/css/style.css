@@ -245,7 +245,111 @@ body {
 .card:hover .product-img {
   transform: scale(1.05);
 }
+/* ==========================================
+   HOME PRODUCTS - 5 PRODUCTS PER ROW
+========================================== */
 
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.product-column {
+    width: 20%;
+    padding: 8px;
+}
+
+/* Product card */
+.product-card {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Product image */
+.product-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.03);
+}
+
+/* Product title */
+.product-card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Price */
+.product-card .text-primary {
+    color: #d63384 !important;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+/* Desktop = 5 */
+@media (min-width: 1200px) {
+    .product-column {
+        width: 20%;
+    }
+}
+
+/* Laptop = 4 */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .product-column {
+        width: 25%;
+    }
+}
+
+/* Tablet = 3 */
+@media (min-width: 768px) and (max-width: 991px) {
+    .product-column {
+        width: 33.333333%;
+    }
+}
+
+/* Mobile = 2 */
+@media (max-width: 767px) {
+    .product-column {
+        width: 50%;
+    }
+
+    .product-image {
+        height: 180px;
+    }
+}
+
+/* Small mobile = 1 */
+@media (max-width: 450px) {
+    .product-column {
+        width: 100%;
+    }
+
+    .product-image {
+        height: 250px;
+    }
+}
 
 /* =========================
    BUY BUTTON

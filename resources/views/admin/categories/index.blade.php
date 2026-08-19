@@ -73,7 +73,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-info">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="bi bi-pencil"></i> Edit
                                 </a>
                                 <form action="{{ route('admin.categories.destroy', $category) }}"
                                     method="POST"
@@ -82,7 +82,7 @@
                                     @method('DELETE')
 
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-trash"></i> Delete
                                     </button>
                                 </form>
                             </div>

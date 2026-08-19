@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontendProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,3 +137,7 @@ Route::prefix('admin')
         )
             ->name('orders.index');
     });
+    
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');

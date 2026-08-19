@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('title', 'Edit Category')
@@ -16,12 +15,12 @@
             <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="name" class="form-label">Category Name *</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
                                    id="name" name="name" value="{{ old('name', $category->name) }}" required>
                             @error('name')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -30,11 +29,12 @@
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" 
+                            <textarea class="form-control @error('description') is-invalid @enderror"
                                       id="description" name="description" rows="4">{{ old('description', $category->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror                        </div>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -42,12 +42,12 @@
                             <label for="image" class="form-label">Category Image</label>
                             @if($category->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset('images/categories/' . $category->image) }}" 
-                                         alt="{{ $category->name }}" 
+                                    <img src="{{ asset('images/categories/' . $category->image) }}"
+                                         alt="{{ $category->name }}"
                                          style="max-width: 150px; max-height: 150px; border-radius: 5px;">
                                 </div>
                             @endif
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" 
+                            <input type="file" class="form-control @error('image') is-invalid @enderror"
                                    id="image" name="image" accept="image/*">
                             <small class="text-muted">Leave empty to keep current image. Recommended: JPEG, PNG, JPG. Max 2MB.</small>
                             @error('image')

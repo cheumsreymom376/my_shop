@@ -103,14 +103,15 @@
 <section class="featured-products py-5 bg-light">
     <div class="container">
         <h2 class="text-center mb-4">Featured Products</h2>
-        <div class="row">
+        <<div class="product-grid">
             @foreach($featured_products as $product)
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="product-column">
                 <div class="card product-card h-100">
                     <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none">
                         @if($product->image)
                         <img src="{{ asset('images/products/' . $product->image) }}"
-                            alt="{{ $product->name }}">
+                            alt="{{ $product->name }}"
+                            class="product-image">
                         @else
                         <div class="bg-light product-img d-flex align-items-center justify-content-center">
                             <i class="bi bi-image" style="font-size: 50px; color: #ccc;"></i>
@@ -139,7 +140,7 @@
                 </div>
             </div>
             @endforeach
-        </div>
+    </div>
     </div>
 </section>
 @endif
@@ -151,15 +152,15 @@
             <h2 class="mb-0">Latest Products</h2>
             <a href="{{ route('products.index') }}" class="btn btn-outline-primary">View All</a>
         </div>
-        <div class="row">
+        <div class="product-grid">
             @forelse($products as $product)
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="product-column">
                 <div class="card product-card h-100">
                     <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none">
                         @if($product->image)
                         <img src="{{ asset('images/products/' . $product->image) }}"
                             alt="{{ $product->name }}"
-                            class="card-img-top">
+                            class="product-image">
                         @else
                         <div class="bg-light product-img d-flex align-items-center justify-content-center">
                             <i class="bi bi-image" style="font-size: 50px; color: #ccc;"></i>
